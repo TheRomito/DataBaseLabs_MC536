@@ -37,7 +37,20 @@ Faça a projeção em relação a Patologia, ou seja, conecte patologias que sã
 
 ### Resolução
 ~~~cypher
-(escreva aqui a resolução em Cypher)
+//Criando a Relação 'IsTreated' de Patologia para Medicamento
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/santanche/lab2learn/master/data/faers-2017/drug-use.csv' AS line
+MATCH (d:Drug {code: line.codedrug})
+MATCH (p:Pathology {code: line.codepathology})
+MERGE (p)-[t:IsTreated]->(d)
+ON CREATE SET t.weight=1
+ON MATCH SET t.weight=t.weight+1
+
+//Fazendo a projeção com base nesta relação
+MATCH (p1:Pathology)-[a]->(d:Drug)<-[b]-(p2:Pathology)
+WHERE a.weight > 20 AND b.weight > 20
+MERGE (p1)<-[r:Relates2]->(p2)
+ON CREATE SET r.weight=1
+ON MATCH SET r.weight=r.weight+1
 ~~~
 
 ## Exercício 5
