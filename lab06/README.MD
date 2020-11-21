@@ -65,7 +65,9 @@ LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/santanche/lab2lear
 MATCH (d:Drug {code: line1.codedrug})
 MATCH (p:Pathology {code: line2.codePathology})
 WHERE line1.idperson = line2.idPerson
-CREATE (d)-[:Collateral {person: line1.idperson}]->(p)
+MERGE (d)-[:Collateral {person: line1.idperson}]->(p)
+ON CREATE SET t.weight=1
+ON MATCH SET t.weight=t.weight+1
 ~~~
 
 ## Exercício 6
