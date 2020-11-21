@@ -59,7 +59,13 @@ Construa um grafo ligando os medicamentos aos efeitos colaterais (com pesos asso
 
 ### Resolução
 ~~~cypher
-(escreva aqui a resolução em Cypher)
+//Provavelmente funcionaria, porem todas as soluções deram problema de armazenamento
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/santanche/lab2learn/master/data/faers-2017/drug-use.csv' AS line1
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/santanche/lab2learn/master/data/faers-2017/sideeffect.csv' AS line2
+MATCH (d:Drug {code: line1.codedrug})
+MATCH (p:Pathology {code: line2.codePathology})
+WHERE line1.idperson = line2.idPerson
+CREATE (d)-[:Collateral {person: line1.idperson}]->(p)
 ~~~
 
 ## Exercício 6
