@@ -78,5 +78,7 @@ Proponha um tipo de análise e escreva uma sentença em Cypher que realize a an�
 
 ### Resolução
 ~~~cypher
-(escreva aqui a resolução em Cypher)
+MATCH (d)-[c:Collateral]->(p)
+WHERE c.weight > 20
+RETURN d,p
 ~~~
