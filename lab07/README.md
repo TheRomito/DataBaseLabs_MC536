@@ -25,9 +25,9 @@ YIELD nodeId, score
 RETURN gds.util.asNode(nodeId).name AS name, score AS pagerank
 ~~~
 
-> Coloque aqui a imagem resultante conforme o exemplo (não obrigatório, mas sugerido - imagem produzida pelo CytoScape ou Gephi).
+> Eu tentei criar a representação visual da tabela, porém não achei a opção para tal no Neo4j:
 
-![PageRank](images/pagerank-cytoscape.png)
+![](https://github.com/TheRomito/DataBaseLabs_MC536/blob/master/lab07/imagem_wikiGraph.png)
 
 ## Exercício 2
 
@@ -59,6 +59,6 @@ YIELD nodeId, communityId
 RETURN gds.util.asNode(nodeId).name AS name, communityId
 ~~~
 
-> Coloque aqui a imagem resultante conforme o exemplo (não obrigatório, mas sugerido - imagem produzida pelo CytoScape ou Gephi).
+> Mesmo problema do exercício acima.
 
-![Comunidade](images/comunidade-cytoscape.png)
+![]()
