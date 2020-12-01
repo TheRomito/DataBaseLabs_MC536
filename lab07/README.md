@@ -25,7 +25,7 @@ YIELD nodeId, score
 RETURN gds.util.asNode(nodeId).name AS name, score AS pagerank
 ~~~
 
-> Eu tentei criar a representação visual da tabela, porém não achei a opção para tal no Neo4j:
+> Eu tentei criar a representação visual da tabela, porém os programas não abriram, então coloquei uma imagem da Tabela do Neo4j mesmo:
 
 ![](https://github.com/TheRomito/DataBaseLabs_MC536/blob/master/lab07/imagem_wikiGraph.png)
 
