@@ -120,7 +120,12 @@ Liste todos os códigos ChEBI dos componentes disponíveis.
 
 #### Resolução
 ~~~xquery
-(escreva aqui a resolução em XQuery)
+let $pubchem:= doc('https://raw.githubusercontent.com/santanche/lab2learn/master/data/pubchem/pubchem-chebi-synonyms.xml')
+
+for $i in ($pubchem//Synonym)
+let $aux := substring($i/text(), 1, 5)
+where $aux = 'CHEBI'
+return {substring($i/text(), 7)}
 ~~~
 
 ### Questão 3.2
@@ -129,7 +134,13 @@ Liste todos os códigos ChEBI e primeiro nome (sinônimo) de cada um dos compone
 
 #### Resolução
 ~~~xquery
-(escreva aqui a resolução em XQuery)
+let $pubchem:= doc('https://raw.githubusercontent.com/santanche/lab2learn/master/data/pubchem/pubchem-chebi-synonyms.xml')
+
+for $i in ($pubchem//Information)
+for $j in ($i/Synonym)
+let $aux := substring($j/text(), 1, 5)
+where $aux = 'CHEBI'
+return {$i/Synonym[1]/text(),  substring($j/text(), 7), '&#xa;'}
 ~~~
 
 ### Questão 3.3
@@ -138,5 +149,15 @@ Para cada código ChEBI, liste os sinônimos e o nome que aparece para o mesmo c
 
 #### Resolução
 ~~~xquery
-(escreva aqui a resolução em XQuery)
+let $pubchem := doc('https://raw.githubusercontent.com/santanche/lab2learn/master/data/pubchem/pubchem-chebi-synonyms.xml')
+let $dron := doc('https://raw.githubusercontent.com/santanche/lab2learn/master/data/faers-2017-dron/dron.xml')
+
+for $i in ($pubchem//Information)
+for $j in ($i/Synonym)
+let $aux := substring($j/text(), 1, 5)
+where $aux = 'CHEBI'
+for $p in ($j),
+    $d in ($dron//drug)
+where substring($d/@id, 38) = substring($j/text(), 7)
+return {'Código CHEBI:', data(substring($d/@id, 38)), '&#xa;', data($d/@name), data($i), '&#xa;'}
 ~~~
